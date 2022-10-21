@@ -1,14 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import MapView, { Callout } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import * as Location from 'expo-location';
 import { Marker } from 'react-native-maps';
+import * as SplashScreen from 'expo-splash-screen';
+
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
+
+
 
 export default function App() {
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState({
+    "coords": {
+      "latitude": 52.387441699495454,
+      "longitude": 4.832761490372075,
+    }
+  });
   const [errorMsg, setErrorMsg] = useState(null);
+  const [appIsReady, setAppIsReady] = useState(false);
+
 
   useEffect(() => {
+
     (async () => {
       
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -16,8 +31,12 @@ export default function App() {
         setErrorMsg('Permission to access location was denied');
         return;
       }
+      if ( user_location !== 'Waiting..') {
+        setAppIsReady(true);
+      }
 
       let location = await Location.getCurrentPositionAsync({});
+      setAppIsReady(true);
       setLocation(location);
     })();
   }, []);
@@ -34,14 +53,40 @@ export default function App() {
     user_latitude = parseFloat(JSON.stringify(location.coords.latitude));
   }
 
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      // This tells the splash screen to hide immediately! If we call this after
+      // `setAppIsReady`, then we may see a blank screen while the app is
+      // loading its initial state and rendering its first pixels. So instead,
+      // we hide the splash screen once we know the root view has already
+      // performed layout.
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <MapView style={styles.map}>
-        <Marker coordinate={{latitude: user_latitude, longitude: user_longitude}}>
+        <Marker coordinate={{
+          latitude: user_latitude, 
+          longitude: user_longitude
+          }}>
         <Callout> 
           <Text>"This is you!"</Text>
         </Callout>
         </Marker>
+        <Marker coordinate={{
+          latitude: 52.3676, 
+          longitude: 4.9041
+          }}>
+          <Callout> 
+          <Text>"This is Amsterdam!"</Text>
+        </Callout>
+          </Marker>
       </MapView>
     </View>
     
