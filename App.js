@@ -42,9 +42,6 @@ export default function App() {
           <Text>"This is you!"</Text>
         </Callout>
         </Marker>
-
-
-
       </MapView>
     </View>
     
