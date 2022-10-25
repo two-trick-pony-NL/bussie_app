@@ -2,12 +2,14 @@ import React, {Component} from "react";
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { Marker } from 'react-native-maps';
 import MapView from 'react-native-maps';
-
+import LocationDot from './LocationDot'
 
 const Map = () =>{
         return (
             <View style={styles.container}>
-                <MapView style={styles.map} />
+                <MapView style={styles.map}>
+                  <LocationDot></LocationDot>
+                </MapView>
             </View>
         );
 }
