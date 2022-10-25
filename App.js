@@ -3,6 +3,10 @@ import MapView, { Callout } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, FlatList, ScrollView } from 'react-native';
 import Map from './components/map'
 import Table from './components/table'
+
+
+
+
 export default class App extends React.Component {
 
   constructor() {
