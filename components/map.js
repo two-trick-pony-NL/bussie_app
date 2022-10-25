@@ -23,14 +23,14 @@ const Map = () =>{
   useEffect(() => {
     (async () => {
       
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      let { status } = Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
       }
-
-      let location = await Location.getCurrentPositionAsync({});
+      let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.Highest, maximumAge: 3000});
       setLocation(location);
+
 
     })();
   }, []);
@@ -49,13 +49,13 @@ const Map = () =>{
                 showsUserLocation= {true}
                 initialRegion={{
                   latitude: location.coords.latitude, 
-                longitude: location.coords.longitude,
+                  longitude: location.coords.longitude,
                   latitudeDelta: 2.922,
                   longitudeDelta: 1.821,
                 }}
                 mapType="mutedStandard"
                 >
-                  <Pins/>
+                  <Pins />
                 </MapView>
             </View>
         );
