@@ -1,13 +1,22 @@
-import React, {Component} from "react";
+
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import { Marker } from 'react-native-maps';
 import MapView from 'react-native-maps';
 import LocationDot from './LocationDot'
 
 const Map = () =>{
         return (
             <View style={styles.container}>
-                <MapView style={styles.map}>
+                <MapView 
+                style={styles.map}
+                showsUserLocation= {true}
+                initialRegion={{
+                  latitude: 52.0907, 
+                longitude: 5.1214,
+                  latitudeDelta: 0.00922,
+                  longitudeDelta: 0.00421,
+                }}
+                mapType="mutedStandard"
+                >
                   <LocationDot></LocationDot>
                 </MapView>
             </View>

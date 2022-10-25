@@ -19,7 +19,8 @@
     "react-native": "0.69.6",
     "react-native-maps": "0.31.1",
     "react-native-paper": "^5.0.0-rc.8",
-    "react-native-web": "^0.18.9"
+    "react-native-web": "^0.18.9",
+    "expo-updates": "~0.14.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
