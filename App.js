@@ -25,9 +25,9 @@ export default class App extends React.Component {
           <Text style={styles.LightSlogan}>komt zo </Text>
         </Text>
         </View>
-        <View>
+        <View style={{borderTopLeftRadius: 20, borderTopRightRadius: 20}}>
         <Text style={{paddingLeft:15, padding:2}}>Vertrekkend vanaf: Leidsche rijn (Centrum)</Text>
-        <Table></Table>
+        <Table style={{borderTopLeftRadius: 20, borderTopRightRadius: 20}}></Table>
         </View>
         </ScrollView>
       </View>
@@ -54,7 +54,8 @@ const styles = StyleSheet.create(
     LightSlogan: {
       fontSize: 20,
       fontWeight: "bold", 
-      color:"#D3D3D3",      
+      color:"#D3D3D3",
+      fontStyle: 'italic',      
     },
     
   });
