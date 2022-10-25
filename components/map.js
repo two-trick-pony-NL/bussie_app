@@ -7,7 +7,6 @@ import MapView from 'react-native-maps';
 import Pins from './Pins'
 
 const Map = () =>{
-  const [ClosestStop, setClosestStop] = useState(null);
   const [location, setLocation] = useState({
     "coords": {
       "accuracy": 35,
@@ -33,6 +32,7 @@ const Map = () =>{
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
+
     })();
   }, []);
 
