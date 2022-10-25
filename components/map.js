@@ -1,4 +1,3 @@
-
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import React, { useState, useEffect, useCallback } from 'react';
 import * as Location from 'expo-location';
