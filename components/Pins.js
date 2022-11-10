@@ -32,10 +32,12 @@ const Pins = () =>{
   useEffect(() => {
     (async () => {
       
+      
     let location = await Location.getCurrentPositionAsync({});
     setLocation(location);
 
     fetch('https://https://bussie.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com/get_closest_stations/?latitude='+parseFloat(location.coords.latitude)+'&longitude='+parseFloat(location.coords.longitude))
+
       .then((response) => response.json())
       .then((json) => setData(json))
       .catch((error) => console.error(error))
